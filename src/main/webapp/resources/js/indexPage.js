@@ -1,29 +1,29 @@
-
 import {DateTime} from './date-time.js';
+import {Clock} from "./clock.js";
 
-$(() => {
-    // const interval = 5000;
-    //
-    // const clock = new Clock({
-    //     $hour: $('.hour'),
-    //     $minute: $('.minute'),
-    //     $second: $('.second'),
-    // });
-    //
-    // clock.show();
-    // setInterval(clock.show, interval);
+document.addEventListener('DOMContentLoaded', () => {
+    const interval = 6000;
+
+    const clock = new Clock({
+        hour: document.querySelector('.hour'),
+        minute: document.querySelector('.minute'),
+        second: document.querySelector('.second'),
+    });
+
+    clock.show();
+    setInterval(() => clock.show(), interval);
 
     const dateTime = new DateTime({
-        $dayName: $('#day-name'),
-        $month: $('#month'),
-        $dayNumber: $('#day-number'),
-        $year: $('#year'),
-        $hour: $('#hour'),
-        $minutes: $('#minutes'),
-        $seconds: $('#seconds'),
-        $period: $('#period'),
+        dayName: document.getElementById('day-name'),
+        month: document.getElementById('month'),
+        dayNumber: document.getElementById('day-number'),
+        year: document.getElementById('year'),
+        hour: document.getElementById('hour'),
+        minutes: document.getElementById('minutes'),
+        seconds: document.getElementById('seconds'),
+        period: document.getElementById('period'),
     });
 
     dateTime.show();
-    setInterval(dateTime.show, 6000);
+    setInterval(() => dateTime.show(), interval);
 });
