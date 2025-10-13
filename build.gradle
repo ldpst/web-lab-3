@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group = 'com.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.glassfish:jakarta.faces:4.0.1'
+
+    providedCompile 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+
+    implementation 'jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1'
+    implementation 'jakarta.inject:jakarta.inject-api:2.0.1'
+
+    implementation 'jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1'
+    implementation 'org.jboss.weld.servlet:weld-servlet-shaded:6.0.0.Final'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
+}
+
+war {
+    archiveFileName = 'jsf-demo.war'
+}
