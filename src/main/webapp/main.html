@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--    <style>-->
+    <!--        @font-face {-->
+    <!--            font-family: 'Monofonto';-->
+    <!--            src: url('static/font/monofonto.otf') format('opentype');-->
+    <!--        }-->
+
+    <!--        body {-->
+    <!--            cursor: url('static/cursor/fnv.cur'), auto;-->
+    <!--        }-->
+    <!--    </style>-->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB Lab3</title>
+
+    <link rel="stylesheet" href="resources/css/main.css">
+    <link rel="stylesheet" href="resources/css/graph.css">
+</head>
+<body>
+<div id="screen">
+    <div id="left-div">
+        <div id="top-div">
+            <div id="name-header" class="text">
+                <span id="name-text">Выполнил: Мельник Фёдор Александрович</span>
+                <br/>
+                <span id="subname-text">Группа: P3206    ISU: 466690</span>
+            </div>
+        </div>
+        <div id="bottom-div">
+            <div id="input-div">
+                <div id="v-center-wrapper">
+                    <div id="inputs">
+                        <div id="x-btns">
+                            <span class="select-header text" style="padding-right: 3%">Выберите X:</span>
+                            <label>
+                                <select id="x-select" name="x">
+                                    <option>-4</option>
+                                    <option>-3</option>
+                                    <option>-2</option>
+                                    <option>-1</option>
+                                    <option>0</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div id="zxc">zxc</div>
+                    </div>
+                </div>
+            </div>
+            <div id="graph-center-wrapper">
+                <div id="graph-container" data-r="2">
+                    <svg id="graph-svg" width="100%" height="100%"></svg>
+                    <svg id="overlay-svg" width="100%" height="100%"></svg>
+                    <div id="overlay-error" class="error">❌ Введите в формате числа (от -5 до 3)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="right-div">
+
+    </div>
+</div>
+
+</body>
+</html>

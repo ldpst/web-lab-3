@@ -1,0 +1,118 @@
+body {
+    /*backdrop-filter: blur(5px);*/
+    background-image: url("../img/markanyan-crop.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+html {
+    padding: 0;
+    margin: 0;
+}
+
+#screen {
+    display: flex;
+    position: relative;
+    height: 100svh;
+    width: 100%;
+}
+
+html {
+    padding: 0;
+    margin: 0;
+}
+
+#left-div {
+    width: 59%;
+    height: 100%;
+}
+
+#right-div {
+    width: 41%;
+    height: 100%;
+    /*border: 5px solid green;*/
+}
+
+#top-div {
+    height: 5%;
+    width: 100%;
+    /*border: 5px solid aqua;*/
+}
+
+#bottom-div {
+    height: 95%;
+    width: 100%;
+    display: flex;
+    /*border: 5px solid red;*/
+}
+
+.text {
+    font-family: "Century Gothic", serif;
+}
+
+#name-header {
+    backdrop-filter: blur(10px);
+    border-bottom-right-radius: 15px;
+    border: 2px solid black;
+    border-top: none;
+    border-left: none;
+    width: 60%;
+    height: 100%;
+    padding-left: 10px;
+}
+
+#name-text {
+    font-size: 24px;
+}
+
+#subname-text {
+    font-size: 16px;
+}
+
+#input-div {
+    width: 50%;
+    height: 100%;
+    /*border: 2px solid brown;*/
+}
+
+#graph-center-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+}
+
+#v-center-wrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin-left: 40px;
+}
+
+#inputs {
+    display: flex;
+    align-items: center;
+    width: 550px;
+    height: 550px;
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid black;
+}
+
+#x-btns {
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid black;
+    padding: 20px;
+}
+
+.select-header {
+    font-size: 24px;
+}

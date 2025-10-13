@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>WEB Lab1</title>
+    <h:outputStylesheet library="css" name="main.css"/>
+    <h:outputStylesheet library="css" name="topPanel.css"/>
+</h:head>
+<h:body>
+    <div id="screen">
+        <div id="mid-panel">
+
+            <div id="top-panel">
+                <div id="headers">
+                    <div>
+                        <span style="font-size: 20px">Мельник Фёдор Александрович</span><br/>
+                        <span>ISU: 466690</span>
+                    </div>
+                    <div>
+                        <span>P3206</span><br/>
+                        <span>Вариант: 466690</span>
+                    </div>
+                </div>
+                <div id="scroll-btn-div">
+                    <button id="scroll-top-panel-btn">↓</button>
+                </div>
+            </div>
+
+            <h:form id="shoot-form" prependId="false">
+                <div id="table-wrapper">
+                    <table id="graph-table">
+                        <tr>
+                            <td>
+                                <div class="center-wrapper">
+                                    <div class="btns">
+                                        <div style="padding: 3%">
+                                            <span class="select-header" style="padding-right: 3%">Выберите X:</span>
+                                            <label>
+                                                <h:selectOneMenu id="x-select" value="#{bean.x}" styleClass="">
+                                                    <f:selectItem itemValue="-4" itemLabel="-4"/>
+                                                    <f:selectItem itemValue="-3" itemLabel="-3"/>
+                                                    <f:selectItem itemValue="-2" itemLabel="-2"/>
+                                                    <f:selectItem itemValue="-1" itemLabel="-1"/>
+                                                    <f:selectItem itemValue="0" itemLabel="0"/>
+                                                    <f:selectItem itemValue="1" itemLabel="1"/>
+                                                    <f:selectItem itemValue="2" itemLabel="2"/>
+                                                    <f:selectItem itemValue="3" itemLabel="3"/>
+                                                    <f:selectItem itemValue="4" itemLabel="4"/>
+                                                </h:selectOneMenu>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td rowspan="4">
+                                <h:panelGroup layout="block" id="graph-container" style="width:100%; height:100%; position:relative;">
+                                    <h:panelGroup id="graphSvgContainer" style="width:100%; height:100%; position:absolute; top:0; left:0;"/>
+                                    <h:panelGroup id="overlaySvgContainer" style="width:100%; height:100%; position:absolute; top:0; left:0;"/>
+                                    <div id="overlay-error" class="error">❌ Введите в формате числа (от -5 до 3)</div>
+                                </h:panelGroup>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="center-wrapper">
+                                    <div class="btns">
+                                        <div class="select-headers">
+                                            <span class="select-header">Введите Y:</span>
+                                            <span class="select-header">(-5..3)</span>
+                                        </div>
+                                        <div class="center-wrapper" style="padding: 3%">
+                                            <div class="input-wrapper">
+                                                <h:inputText id="y-input" value="#{bean.y}"
+                                                             styleClass=""
+                                                             placeholder="1"/>
+                                                <div id="y-error" class="error">❌ Введите в формате числа (от -5 до 3)</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="center-wrapper">
+                                    <div class="btns">
+                                        <div style="padding: 3%">
+                                            <span class="select-header" style="padding-right: 3%">Выберите R:</span>
+                                            <label>
+                                                <h:selectOneMenu id="r-select" value="#{bean.r}">
+                                                    <f:selectItem itemValue="1" itemLabel="1"/>
+                                                    <f:selectItem itemValue="1.5" itemLabel="1.5"/>
+                                                    <f:selectItem itemValue="2" itemLabel="2"/>
+                                                    <f:selectItem itemValue="2.5" itemLabel="2.5"/>
+                                                    <f:selectItem itemValue="3" itemLabel="3"/>
+                                                </h:selectOneMenu>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="center-wrapper">
+                                    <div class="input-wrapper">
+                                        <h:commandButton id="send-btn" value="ОТПРАВИТЬ" action="#{bean.submit}"/>
+                                        <div id="send-error" class="error">❌ Сервер недоступен :c</div>
+                                    </div>
+                                    <div>
+                                        <h:commandButton id="clear-btn" value="ОЧИСТИТЬ" action="#{bean.clear}" type="button"/>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </h:form>
+
+            <div class="table-scroll-wrapper">
+                <table id="res-table">
+                    <tr>
+                        <th colspan="6">
+                            <div class="res-header-div">Таблица</div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>X</td>
+                        <td>Y</td>
+                        <td>R</td>
+                        <td>Время выполнения</td>
+                        <td>Дата</td>
+                        <td>Попадание (Y/N)</td>
+                    </tr>
+                    <ui:repeat value="#{bean.results}" var="row">
+                        <tr>
+                            <td>#{row.x}</td>
+                            <td>#{row.y}</td>
+                            <td>#{row.r}</td>
+                            <td>#{row.executionTime}</td>
+                            <td>#{row.date}</td>
+                            <td>#{row.hit}</td>
+                        </tr>
+                    </ui:repeat>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="module" src="resources/js/graph.js"/>
+    <script type="module" src="resources/js/overlay.js"/>
+    <script type="module" src="resources/js/logic.js"/>
+    <script type="module" src="resources/js/topPanel.js"/>
+</h:body>
+</html>
