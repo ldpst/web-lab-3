@@ -1,5 +1,4 @@
 body {
-    /*backdrop-filter: blur(5px);*/
     background-image: url("../img/markanyan-crop.png");
     background-size: cover;
     background-position: center;
@@ -10,7 +9,7 @@ body {
     position: relative;
 }
 
-html {
+html, body {
     padding: 0;
     margin: 0;
 }
@@ -22,33 +21,32 @@ html {
     width: 100%;
 }
 
-html {
-    padding: 0;
-    margin: 0;
-}
-
 #left-div {
     width: 59%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 #right-div {
     width: 41%;
     height: 100%;
-    /*border: 5px solid green;*/
 }
 
 #top-div {
-    height: 5%;
     width: 100%;
-    /*border: 5px solid aqua;*/
+    flex: 0 0 auto;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-left: none;
+    border-top: none;
 }
 
 #bottom-div {
-    height: 95%;
     width: 100%;
     display: flex;
-    /*border: 5px solid red;*/
+    flex: 1 1 auto;
 }
 
 .text {
@@ -56,9 +54,6 @@ html {
 }
 
 #name-header {
-    backdrop-filter: blur(10px);
-    border-bottom-right-radius: 15px;
-    border: 2px solid black;
     border-top: none;
     border-left: none;
     width: 60%;
@@ -77,42 +72,115 @@ html {
 #input-div {
     width: 50%;
     height: 100%;
-    /*border: 2px solid brown;*/
 }
 
-#graph-center-wrapper {
+.half-center-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50%;
-    height: 100%;
 }
 
 #v-center-wrapper {
     display: flex;
     align-items: center;
-    height: 100%;
+    justify-content: center;
     width: 100%;
     margin-left: 40px;
 }
 
-#inputs {
+#scroll-div {
     display: flex;
-    align-items: center;
-    width: 550px;
-    height: 550px;
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    border: 1px solid black;
+    justify-content: flex-start;
+    gap: 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
-#x-btns {
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    border: 1px solid black;
-    padding: 20px;
+#inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    flex-shrink: 0;
+    width: 440px;
+    height: 440px;
+}
+
+.btns {
+    padding: 20px 60px 20px 60px;
+    margin: 20px;
+}
+
+.background-none {
+    background: none;
+}
+
+#y-error {
+    display: none;
+}
+
+#send-error {
+    display: none;
 }
 
 .select-header {
     font-size: 24px;
+}
+
+#graph-container {
+    position: relative;
+    width: 440px;
+    height: 440px;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+}
+
+#graph-svg,
+#overlay-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#graph-svg {
+    z-index: 0;
+}
+
+#overlay-svg {
+    z-index: 1;
+}
+
+#overlay-error {
+    display: none;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.justify-content-start {
+    justify-content: start;
+}
+
+.justify-content-end {
+    justify-content: end;
+}
+
+.liquid-glass {
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-shadow:
+            inset 0 0 15px rgba(255, 255, 255, 0.3), /* внутренний блик */
+            0 0 30px rgba(0, 0, 0, 0.2);             /* внешняя тень */
+    border: 1px solid black;
 }
