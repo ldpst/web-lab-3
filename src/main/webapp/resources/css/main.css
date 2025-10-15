@@ -31,16 +31,19 @@ html, body {
 #right-div {
     width: 41%;
     height: 100%;
+    display: flex;
+
 }
 
 #top-div {
-    width: 100%;
+    width: 95%;
     flex: 0 0 auto;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border-top-right-radius: 0;
     border-left: none;
     border-top: none;
+    margin-right: 5%;
 }
 
 #bottom-div {
@@ -80,13 +83,6 @@ html, body {
     justify-content: center;
 }
 
-#v-center-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin-left: 40px;
-}
 
 #scroll-div {
     display: flex;
@@ -154,42 +150,37 @@ html, body {
     display: none;
 }
 
-.d-flex {
-    display: flex;
-}
-
-.full-width {
-    width: 100%;
-}
-
-.justify-content-center {
-    justify-content: center;
-}
-
-.justify-content-start {
-    justify-content: start;
-}
-
-.justify-content-end {
-    justify-content: end;
-}
-
-.justify-content-space-around {
-    justify-content: space-around;
-}
-
-.liquid-glass {
-    border-radius: 30px;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    box-shadow:
-            inset 0 0 15px rgba(255, 255, 255, 0.3), /* внутренний блик */
-            0 0 30px rgba(0, 0, 0, 0.2);             /* внешняя тень */
-    border: 1px solid black;
-}
-
 .cmd-btn {
     margin: auto;
-    padding: 20px;
+    padding: 20px 30px;
+}
+
+td tr {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+tr {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#div-mover {
+    width: 30px;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    border-left: none;
+    border-top: none;
+    flex: 0 0 auto;
+}
+
+#result-table {
+    flex: 1 1 auto;
+}
+
+
+#scroll-table {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }

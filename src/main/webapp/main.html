@@ -17,6 +17,8 @@
     <title>WEB Lab3</title>
 
     <link rel="stylesheet" href="resources/css/main.css">
+    <link rel="stylesheet" href="resources/css/liquidGlass.css">
+    <link rel="stylesheet" href="resources/css/wrappers.css">
 </head>
 <body>
 <div id="screen">
@@ -36,7 +38,7 @@
                             <div class="btns liquid-glass">
                                 <span class="select-header text">Выберите X:</span>
                                 <label>
-                                    <select class="liquid-glass" id="x-select" name="x">
+                                    <select class="liquid-glass liquid-glass-btn" id="x-select" name="x">
                                         <option>-4</option>
                                         <option>-3</option>
                                         <option>-2</option>
@@ -58,7 +60,7 @@
                                 </div>
                                 <div class="input-wrapper">
                                     <input id="y-input" placeholder="1"
-                                           name="y" class="liquid-glass">
+                                           name="y" class="liquid-glass liquid-glass-btn">
                                     <div id="y-error" class="error">❌ Введите в формате числа (от -5 до 3)</div>
                                 </div>
                             </div>
@@ -67,7 +69,7 @@
                             <div class="btns liquid-glass" id="r-btns">
                                 <span class="select-header">Выберите R:</span>
                                 <label>
-                                    <select id="r-select" class="liquid-glass" name="r">
+                                    <select id="r-select" class="liquid-glass liquid-glass-btn" name="r">
                                         <option>1</option>
                                         <option>1.5</option>
                                         <option>2</option>
@@ -79,11 +81,11 @@
                         </div>
                         <div class="full-width d-flex justify-content-space-around">
                             <div class="input-wrapper">
-                                <button class="cmd-btn liquid-glass text select-header" type="submit" id="send-btn">Отправить</button>
+                                <button class="cmd-btn liquid-glass text select-header liquid-glass-btn" type="submit" id="send-btn">Отправить</button>
                                 <div id="send-error" class="error">❌ Сервер недоступен :c</div>
                             </div>
                             <div>
-                                <button class="cmd-btn liquid-glass text select-header" type="button" id="clear-btn">Очистить</button>
+                                <button class="cmd-btn liquid-glass text select-header liquid-glass-btn" type="button" id="clear-btn">Очистить</button>
                             </div>
                         </div>
                     </div>
@@ -98,9 +100,38 @@
     </div>
 
     <div id="right-div">
+        <div class="full-width full-height d-flex liquid-glass" id=scroll-table>
+            <div class="full-height liquid-glass-btn liquid-glass" id="div-mover">
 
+            </div>
+            <table id="result-table" class="full-height full-width">
+                <tr>
+                    <td>
+                        X
+                    </td>
+                    <td>
+                        Y
+                    </td>
+                    <td>
+                        R
+                    </td>
+                    <td>
+                        Время выполнения
+                    </td>
+                    <td>
+                        Дата
+                    </td>
+                    <td>
+                        Попадание (Y/N)
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
 
+<script type="module" src="resources/js/graphOverlay.js"></script>
+<!--<script type="module" src="resources/js/graph.js"></script>-->
+<script type="module" src="resources/js/logic.js"></script>
 </body>
 </html>

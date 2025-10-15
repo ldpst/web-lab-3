@@ -1,121 +1,66 @@
-const svgNS = "http://www.w3.org/2000/svg";
-
 export function drawGraph(R) {
     const size = 440;
     const center = size / 2;
     const scale = 88 / R;
 
-    const svg = document.createElementNS(svgNS, "svg");
-    svg.setAttribute("id", "graph-svg");
-    svg.setAttribute("width", "100%");
-    svg.setAttribute("height", "100%");
+    const svg = `
+    <svg width="${size}" height="${size}">
+      <!-- Фигуры -->
+      <polygon class="figures" points="${center},${center} ${center - R*scale},${center} ${center},${center - R*scale/2}" fill="lightblue" stroke="black"/>
+      <rect class="figures" x="${center}" y="${center}" width="${R*scale}" height="${R*scale}" fill="lightgreen" stroke="black"/>
+      <circle class="figures" cx="${center}" cy="${center}" r="${R*scale/2}" clip-path="url(#half-circle)" fill="lightyellow" stroke="black"/>
 
-    const polygon = document.createElementNS(svgNS, "polygon");
-    polygon.setAttribute("points", `${center},${center} ${center - R*scale},${center} ${center},${center - R*scale/2}`);
-    polygon.setAttribute("fill", "lightblue");
-    polygon.setAttribute("stroke", "black");
-    svg.appendChild(polygon);
+      <defs>
+        <clipPath id="half-circle">
+          <rect x="${center}" y="${center - R*scale}" width="${R*scale}" height="${R*scale}"/>
+        </clipPath>
+      </defs>
 
-    const rect = document.createElementNS(svgNS, "rect");
-    rect.setAttribute("x", center);
-    rect.setAttribute("y", center);
-    rect.setAttribute("width", R * scale);
-    rect.setAttribute("height", R * scale);
-    rect.setAttribute("fill", "lightgreen");
-    rect.setAttribute("stroke", "black");
-    svg.appendChild(rect);
+      <!-- Оси -->
+      <line x1="${center}" x2="${center}" y1="${size}" y2="0" stroke="black"/>
+      <text x="${center + 5}" y="15">y</text>
+      <line x1="0" x2="${size}" y1="${center}" y2="${center}" stroke="black"/>
+      <text x="${size - 10}" y="${center - 5}">x</text>
 
-    const defs = document.createElementNS(svgNS, "defs");
-    const clipPath = document.createElementNS(svgNS, "clipPath");
-    clipPath.setAttribute("id", "half-circle");
-    const clipRect = document.createElementNS(svgNS, "rect");
-    clipRect.setAttribute("x", center);
-    clipRect.setAttribute("y", center - R * scale);
-    clipRect.setAttribute("width", R * scale);
-    clipRect.setAttribute("height", R * scale);
-    clipPath.appendChild(clipRect);
-    defs.appendChild(clipPath);
-    svg.appendChild(defs);
+      <!-- Засечки по Y -->
+      <line x1="${center-5}" x2="${center+5}" y1="${center - 2*R*scale}" y2="${center - 2*R*scale}" stroke="black"/>
+      <text x="${center+8}" y="${center - 2*R*scale+5}">${2*R}</text>
 
-    const circle = document.createElementNS(svgNS, "circle");
-    circle.setAttribute("cx", center);
-    circle.setAttribute("cy", center);
-    circle.setAttribute("r", R * scale / 2);
-    circle.setAttribute("clip-path", "url(#half-circle)");
-    circle.setAttribute("fill", "lightyellow");
-    circle.setAttribute("stroke", "black");
-    svg.appendChild(circle);
+      <line x1="${center-5}" x2="${center+5}" y1="${center - R*scale}" y2="${center - R*scale}" stroke="black"/>
+      <text x="${center+8}" y="${center - R*scale+5}">${R}</text>
 
-    const yLine = document.createElementNS(svgNS, "line");
-    yLine.setAttribute("x1", center);
-    yLine.setAttribute("x2", center);
-    yLine.setAttribute("y1", size);
-    yLine.setAttribute("y2", 0);
-    yLine.setAttribute("stroke", "black");
-    svg.appendChild(yLine);
+      <line x1="${center-5}" x2="${center+5}" y1="${center - R*scale/2}" y2="${center - R*scale/2}" stroke="black"/>
+      <text x="${center+8}" y="${center - R*scale/2+5}">${R/2}</text>
 
-    const yText = document.createElementNS(svgNS, "text");
-    yText.textContent = "y";
-    yText.setAttribute("x", center + 5);
-    yText.setAttribute("y", 15);
-    svg.appendChild(yText);
+      <line x1="${center-5}" x2="${center+5}" y1="${center + R*scale/2}" y2="${center + R*scale/2}" stroke="black"/>
+      <text x="${center+8}" y="${center + R*scale/2+5}">-${R/2}</text>
 
-    const xLine = document.createElementNS(svgNS, "line");
-    xLine.setAttribute("x1", 0);
-    xLine.setAttribute("x2", size);
-    xLine.setAttribute("y1", center);
-    xLine.setAttribute("y2", center);
-    xLine.setAttribute("stroke", "black");
-    svg.appendChild(xLine);
+      <line x1="${center-5}" x2="${center+5}" y1="${center + R*scale}" y2="${center + R*scale}" stroke="black"/>
+      <text x="${center+8}" y="${center + R*scale+5}">-${R}</text>
 
-    const xText = document.createElementNS(svgNS, "text");
-    xText.textContent = "x";
-    xText.setAttribute("x", size - 10);
-    xText.setAttribute("y", center - 5);
-    svg.appendChild(xText);
+      <line x1="${center-5}" x2="${center+5}" y1="${center + 2*R*scale}" y2="${center + 2*R*scale}" stroke="black"/>
+      <text x="${center+8}" y="${center + 2*R*scale+5}">-${2*R}</text>
 
-    const tickY = (val) => {
-        const line = document.createElementNS(svgNS, "line");
-        line.setAttribute("x1", center - 5);
-        line.setAttribute("x2", center + 5);
-        line.setAttribute("y1", center - val * scale);
-        line.setAttribute("y2", center - val * scale);
-        line.setAttribute("stroke", "black");
-        svg.appendChild(line);
-        const text = document.createElementNS(svgNS, "text");
-        text.textContent = val;
-        text.setAttribute("x", center + 8);
-        text.setAttribute("y", center - val * scale + 5);
-        svg.appendChild(text);
-    };
+      <!-- Засечки по X -->
+      <line x1="${center + 2*R*scale}" x2="${center + 2*R*scale}" y1="${center-5}" y2="${center+5}" stroke="black"/>
+      <text x="${center + 2*R*scale-15}" y="${center-8}">${2*R}</text>
 
-    const tickX = (val) => {
-        const line = document.createElementNS(svgNS, "line");
-        line.setAttribute("x1", center + val * scale);
-        line.setAttribute("x2", center + val * scale);
-        line.setAttribute("y1", center - 5);
-        line.setAttribute("y2", center + 5);
-        line.setAttribute("stroke", "black");
-        svg.appendChild(line);
-        const text = document.createElementNS(svgNS, "text");
-        text.textContent = val;
-        text.setAttribute("x", center + val * scale - 10);
-        text.setAttribute("y", center - 8);
-        svg.appendChild(text);
-    };
+      <line x1="${center + R*scale}" x2="${center + R*scale}" y1="${center-5}" y2="${center+5}" stroke="black"/>
+      <text x="${center + R*scale-10}" y="${center-8}">${R}</text>
 
-    tickY(R);
-    tickY(-R);
-    tickX(R);
-    tickX(-R);
+      <line x1="${center + R*scale/2}" x2="${center + R*scale/2}" y1="${center-5}" y2="${center+5}" stroke="black"/>
+      <text x="${center + R*scale/2-10}" y="${center-8}">${R/2}</text>
 
-    const container = document.getElementById("graphSvgContainer");
-    container.innerHTML = "";
-    container.appendChild(svg);
+      <line x1="${center - R*scale/2}" x2="${center - R*scale/2}" y1="${center-5}" y2="${center+5}" stroke="black"/>
+      <text x="${center - R*scale/2-20}" y="${center-8}">-${R/2}</text>
+
+      <line x1="${center - R*scale}" x2="${center - R*scale}" y1="${center-5}" y2="${center+5}" stroke="black"/>
+      <text x="${center - R*scale-15}" y="${center-8}">-${R}</text>
+
+      <line x1="${center - 2*R*scale}" x2="${center - 2*R*scale}" y1="${center-5}" y2="${center+5}" stroke="black"/>
+      <text x="${center - 2*R*scale-20}" y="${center-8}">-${2*R}</text>
+    </svg>
+  `;
+
+    document.getElementById("graph-svg").innerHTML = svg;
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    const rSelect = document.getElementById("r-select");
-    drawGraph(parseFloat(rSelect.value));
-    rSelect.addEventListener("change", () => drawGraph(parseFloat(rSelect.value)));
-});
