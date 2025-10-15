@@ -101,14 +101,14 @@ html, body {
     flex-direction: column;
     align-items: start;
     justify-content: space-between;
+    padding: 20px;
     flex-shrink: 0;
-    width: 440px;
-    height: 440px;
+    width: 400px;
+    height: 400px;
 }
 
 .btns {
     padding: 20px 60px 20px 60px;
-    margin: 20px;
 }
 
 .background-none {
@@ -124,7 +124,7 @@ html, body {
 }
 
 .select-header {
-    font-size: 24px;
+    font-size: 22px;
 }
 
 #graph-container {
@@ -174,6 +174,10 @@ html, body {
     justify-content: end;
 }
 
+.justify-content-space-around {
+    justify-content: space-around;
+}
+
 .liquid-glass {
     border-radius: 30px;
     background: rgba(255, 255, 255, 0.08);
@@ -183,4 +187,9 @@ html, body {
             inset 0 0 15px rgba(255, 255, 255, 0.3), /* внутренний блик */
             0 0 30px rgba(0, 0, 0, 0.2);             /* внешняя тень */
     border: 1px solid black;
+}
+
+.cmd-btn {
+    margin: auto;
+    padding: 20px;
 }
