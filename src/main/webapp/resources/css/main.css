@@ -33,17 +33,22 @@ html, body {
     height: 100%;
     display: flex;
 
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+
+    flex-direction: row;
 }
 
 #top-div {
-    width: 95%;
+    width: calc(100% - 40px);
     flex: 0 0 auto;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border-top-right-radius: 0;
     border-left: none;
     border-top: none;
-    margin-right: 5%;
 }
 
 #bottom-div {
@@ -153,34 +158,4 @@ html, body {
 .cmd-btn {
     margin: auto;
     padding: 20px 30px;
-}
-
-td tr {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-tr {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-
-#div-mover {
-    width: 30px;
-    border-bottom-right-radius: 0;
-    border-top-right-radius: 0;
-    border-left: none;
-    border-top: none;
-    flex: 0 0 auto;
-}
-
-#result-table {
-    flex: 1 1 auto;
-}
-
-
-#scroll-table {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
 }

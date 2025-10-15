@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="resources/css/main.css">
     <link rel="stylesheet" href="resources/css/liquidGlass.css">
     <link rel="stylesheet" href="resources/css/wrappers.css">
+    <link rel="stylesheet" href="resources/css/table.css">
 </head>
 <body>
 <div id="screen">
@@ -81,11 +82,15 @@
                         </div>
                         <div class="full-width d-flex justify-content-space-around">
                             <div class="input-wrapper">
-                                <button class="cmd-btn liquid-glass text select-header liquid-glass-btn" type="submit" id="send-btn">Отправить</button>
+                                <button class="cmd-btn liquid-glass text select-header liquid-glass-btn" type="submit"
+                                        id="send-btn">Отправить
+                                </button>
                                 <div id="send-error" class="error">❌ Сервер недоступен :c</div>
                             </div>
                             <div>
-                                <button class="cmd-btn liquid-glass text select-header liquid-glass-btn" type="button" id="clear-btn">Очистить</button>
+                                <button class="cmd-btn liquid-glass text select-header liquid-glass-btn" type="button"
+                                        id="clear-btn">Очистить
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -99,12 +104,10 @@
         </div>
     </div>
 
-    <div id="right-div">
+    <div id="right-div" class="d-flex">
         <div class="full-width full-height d-flex liquid-glass" id=scroll-table>
-            <div class="full-height liquid-glass-btn liquid-glass" id="div-mover">
-
-            </div>
-            <table id="result-table" class="full-height full-width">
+            <div class="full-height liquid-glass-btn liquid-glass" id="div-mover"></div>
+            <table id="result-table" class="full-width">
                 <tr>
                     <td>
                         X
@@ -133,5 +136,6 @@
 <script type="module" src="resources/js/graphOverlay.js"></script>
 <!--<script type="module" src="resources/js/graph.js"></script>-->
 <script type="module" src="resources/js/logic.js"></script>
+<script type="module" src="resources/js/scrolls.js"></script>
 </body>
 </html>
