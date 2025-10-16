@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      lang="ru">
+<h:head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>WEB Lab3 (JSF)</title>
+
+    <h:outputStylesheet library="css" name="main.css"/>
+    <h:outputStylesheet library="css" name="liquidGlass.css"/>
+    <h:outputStylesheet library="css" name="wrappers.css"/>
+    <h:outputStylesheet library="css" name="table.css"/>
+</h:head>
+
+<h:body>
+    <div id="screen">
+        <div id="left-div">
+            <div id="top-div" class="liquid-glass">
+                <div id="name-header" class="text">
+                    <span id="name-text">Выполнил: Мельник Фёдор Александрович</span>
+                    <br/>
+                    <span id="subname-text">Группа: P3206 ISU: 466690</span>
+                </div>
+            </div>
+
+            <div id="bottom-div">
+                <div id="v-center-wrapper">
+                    <div id="scroll-div">
+                        <h:form id="input-form">
+                            <div id="inputs" class="liquid-glass">
+                                <!-- X -->
+                                <div class="full-width d-flex justify-content-start">
+                                    <div class="btns liquid-glass">
+                                        <span class="select-header text">Выберите X:</span>
+                                        <h:selectOneMenu value="#{pointBean.x}"
+                                                         styleClass="liquid-glass liquid-glass-btn"
+                                                         id="x-select">
+                                            <f:selectItems value="#{pointBean.xValues}"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+
+                                <!-- Y -->
+                                <div class="full-width d-flex justify-content-center">
+                                    <div class="btns liquid-glass" id="y-btns">
+                                        <div class="select-header text">
+                                            <span class="select-header">Введите Y:</span>
+                                            <span class="select-header">(-5..3)</span>
+                                        </div>
+                                        <div class="input-wrapper">
+                                            <h:inputText id="y-input"
+                                                         value="#{pointBean.y}"
+                                                         required="true"
+                                                         validatorMessage="❌ Введите в формате числа (от -5 до 3)"
+                                                         styleClass="liquid-glass liquid-glass-btn">
+                                                <f:validateDoubleRange minimum="-5" maximum="3"/>
+                                            </h:inputText>
+                                            <h:message for="y-input" styleClass="error"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- R -->
+                                <div class="full-width d-flex justify-content-end">
+                                    <div class="btns liquid-glass" id="r-btns">
+                                        <span class="select-header">Выберите R:</span>
+                                        <h:selectOneMenu value="#{pointBean.r}"
+                                                         styleClass="liquid-glass liquid-glass-btn"
+                                                         id="r-select">
+                                            <f:selectItems value="#{pointBean.rValues}"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+
+                                <!-- Buttons -->
+                                <div class="full-width d-flex justify-content-space-around">
+                                    <div class="input-wrapper">
+                                        <h:commandButton value="Отправить"
+                                                         action="#{pointBean.submit}"
+                                                         styleClass="cmd-btn liquid-glass text select-header liquid-glass-btn"/>
+                                    </div>
+                                    <div>
+                                        <h:commandButton value="Очистить"
+                                                         action="#{pointBean.clear}"
+                                                         immediate="true"
+                                                         styleClass="cmd-btn liquid-glass text select-header liquid-glass-btn"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+
+                        <!-- График -->
+                        <div id="graph-container" class="liquid-glass" data-r="2">
+                            <div id="graph-svg" style="width: 100%; height: 100%"></div>
+                            <div id="overlay-svg" style="width: 100%; height: 100%"></div>
+                            <div id="overlay-error" class="error">❌ Введите в формате числа (от -5 до 3)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Таблица результатов -->
+        <div id="right-div" class="d-flex">
+            <div class="full-width full-height d-flex liquid-glass" id="scroll-table">
+                <div class="full-height liquid-glass-btn liquid-glass" id="div-mover"></div>
+                <h:dataTable value="#{pointBean.results}" var="res" styleClass="full-width" id="result-table">
+                    <h:column>
+                        <f:facet name="header">X</f:facet>
+                        #{res.x}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Y</f:facet>
+                        #{res.y}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">R</f:facet>
+                        #{res.r}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Время выполнения</f:facet>
+                        #{res.executionTime}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Дата</f:facet>
+                        #{res.date}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Попадание (Y/N)</f:facet>
+                        #{res.hit ? 'Y' : 'N'}
+                    </h:column>
+                </h:dataTable>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подключение JS через JSF -->
+    <script type="module" src="#{resource['js/graphOverlay.js']}"></script>
+    <script type="module" src="#{resource['js/logic.js']}"></script>
+    <h:outputScript library="js" name="scrolls.js" type="module"/>
+</h:body>
+</html>
