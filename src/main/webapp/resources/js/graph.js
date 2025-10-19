@@ -1,4 +1,4 @@
-export function drawGraph(R) {
+function drawGraph(R) {
     const size = 440;
     const center = size / 2;
     const scale = 88 / R;
@@ -64,3 +64,7 @@ export function drawGraph(R) {
 
     document.getElementById("graph-svg").innerHTML = svg;
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    drawGraph(1);
+});

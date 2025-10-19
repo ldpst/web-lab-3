@@ -1,17 +1,18 @@
 const overlaySvg = document.getElementById("overlay-svg");
-const rSelect = document.getElementById("r-select");
-let R = rSelect.value;
+let rInput = document.getElementById("input-form:r-spinner_input");
+let R = rInput.value;
 
-function savePoints(points) {
-    localStorage.setItem('savedPoints', JSON.stringify(points));
-}
+// function savePoints(points) {
+//     localStorage.setItem('savedPoints', JSON.stringify(points));
+// }
+//
+// function loadPoints() {
+//     const saved = localStorage.getItem('savedPoints');
+//     return saved ? JSON.parse(saved) : [];
+// }
 
-function loadPoints() {
-    const saved = localStorage.getItem('savedPoints');
-    return saved ? JSON.parse(saved) : [];
-}
-
-let points = loadPoints();
+// let points = loadPoints();
+let points = [];
 
 function getSvgSize() {
     const rect = overlaySvg.getBoundingClientRect();
@@ -59,7 +60,7 @@ overlaySvg.addEventListener("mouseleave", () => {
 let pointsGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
 overlaySvg.appendChild(pointsGroup);
 
-export function renderAllPoints(newR) {
+function renderAllPoints(newR) {
     R = newR;
     while (pointsGroup.firstChild) {
         pointsGroup.removeChild(pointsGroup.firstChild);
@@ -82,7 +83,10 @@ export function renderAllPoints(newR) {
 }
 
 overlaySvg.addEventListener("click", (e) => {
-    R = rSelect.value;
+    rInput = document.getElementById("input-form:r-spinner_input");
+    console.log("rInput " + rInput)
+    R = rInput.value;
+    console.log("R " + R);
 
     const rect = overlaySvg.getBoundingClientRect();
     const {width, height} = getSvgSize();
@@ -102,7 +106,7 @@ overlaySvg.addEventListener("click", (e) => {
 
     points.push(newPoint);
 
-    savePoints(points);
+    // savePoints(points);
 
     renderAllPoints(R);
 
@@ -153,7 +157,7 @@ function checkY(str, error) {
 }
 
 function toGraphCoords(px, py, width, height) {
-    const baseScale = 88 / R;
+    const baseScale = 440 / 30 * R;
     const actualScale = (width / 440) * baseScale;
 
     let x = (px - width / 2) / actualScale;
@@ -162,21 +166,21 @@ function toGraphCoords(px, py, width, height) {
 }
 
 function toPixelCoords(x, y, width, height) {
-    const baseScale = 88 / R;
+    const baseScale = 400 / 30 * R;
     const actualScale = (width / 440) * baseScale;
 
     let px = x * actualScale + width / 2;
     let py = -y * actualScale + height / 2;
+    console.log(px, py);
     return {px, py};
 }
 
-export function clearAllPoints() {
+function clearAllPoints() {
     points = [];
-    savePoints(points);
+    // savePoints(points);
     renderAllPoints(R);
 }
 
-rSelect.addEventListener('change', function() {
-    R = rSelect.value;
-    renderAllPoints(R);
+document.addEventListener("DOMContentLoaded", ()=>{
+    renderAllPoints(rInput.value);
 });

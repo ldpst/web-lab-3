@@ -4,8 +4,10 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-@Named("pointBean")
+@Named("point")
 @SessionScoped
 public class PointBean implements Serializable {
     private Double x;

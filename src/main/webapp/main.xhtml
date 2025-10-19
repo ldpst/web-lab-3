@@ -8,6 +8,8 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+    <f:view locale="en"/>
+
     <title>WEB Lab3 (JSF)</title>
 
     <h:outputStylesheet library="css" name="main.css"/>
@@ -39,44 +41,44 @@
                                         <span class="select-header text">Выберите X:</span>
                                         <div class="full-width d-flex justify-content-space-between">
                                             <h:commandButton styleClass="x-btn liquid-glass-btn" value="-3"
-                                                             action="#{pointBean.setX(-3)}" onclick="switchX(this)">
+                                                             action="#{point.setX(-3)}" onclick="switchX(this)">
                                                 <f:ajax render="@none"/>
                                             </h:commandButton>
                                             <h:commandButton styleClass="x-btn liquid-glass-btn" value="-2"
-                                                             action="#{pointBean.setX(-2)}" onclick="switchX(this)">
+                                                             action="#{point.setX(-2)}" onclick="switchX(this)">
                                                 <f:ajax render="@none"/>
                                             </h:commandButton>
                                             <h:commandButton styleClass="x-btn liquid-glass-btn" value="-1"
-                                                             action="#{pointBean.setX(-1)}" onclick="switchX(this)">
+                                                             action="#{point.setX(-1)}" onclick="switchX(this)">
                                                 <f:ajax render="@none"/>
                                             </h:commandButton>
                                             <h:commandButton styleClass="x-btn liquid-glass-btn" value="0"
-                                                             action="#{pointBean.setX(0)}"
+                                                             action="#{point.setX(0)}"
                                                              onclick="switchX(this)">
                                                 <f:ajax render="@none"/>
                                             </h:commandButton>
                                             <h:commandButton styleClass="x-btn liquid-glass-btn" value="1"
-                                                             action="#{pointBean.setX(1)}"
+                                                             action="#{point.setX(1)}"
                                                              onclick="switchX(this)">
                                                 <f:ajax render="@none"/>
                                             </h:commandButton>
                                             <h:commandButton styleClass="x-btn liquid-glass-btn" value="2"
-                                                             action="#{pointBean.setX(2)}"
+                                                             action="#{point.setX(2)}"
                                                              onclick="switchX(this)">
                                                 <f:ajax render="@none"/>
                                             </h:commandButton>
                                             <h:commandButton styleClass="x-btn liquid-glass-btn" value="3"
-                                                             action="#{pointBean.setX(3)}"
+                                                             action="#{point.setX(3)}"
                                                              onclick="switchX(this)">
                                                 <f:ajax render="@none"/>
                                             </h:commandButton>
                                             <h:commandButton styleClass="x-btn liquid-glass-btn" value="4"
-                                                             action="#{pointBean.setX(4)}"
+                                                             action="#{point.setX(4)}"
                                                              onclick="switchX(this)">
                                                 <f:ajax render="@none"/>
                                             </h:commandButton>
                                             <h:commandButton styleClass="x-btn liquid-glass-btn" value="5"
-                                                             action="#{pointBean.setX(5)}"
+                                                             action="#{point.setX(5)}"
                                                              onclick="switchX(this)">
                                                 <f:ajax render="@none"/>
                                             </h:commandButton>
@@ -93,7 +95,7 @@
                                         </div>
                                         <div class="d-flex position-relative">
                                             <h:inputText id="y-input"
-                                                         value="#{pointBean.y}"
+                                                         value="#{point.y}"
                                                          styleClass="liquid-glass liquid-glass-btn"
                                                          required="true"
                                                          validatorMessage="❌ Введите в формате числа (от -3 до 5)"
@@ -111,13 +113,15 @@
                                     <div class="liquid-glass text" id="r-btns">
                                         <span class="select-header">Выберите R:</span>
                                         <p:spinner id="r-spinner"
-                                                   value="#{pointBean.r}"
+                                                   value="#{point.r}"
                                                    min="0.1"
                                                    max="3"
                                                    step="0.1"
                                                    stepFactor="0.1"
                                                    decimalPlaces="1"
-                                                   styleClass="r-spinner">
+                                                   styleClass="r-spinner"
+                                                   onchange="drawGraph(this.value); renderAllPoints(this.value)"
+                                        >
                                         </p:spinner>
 
                                         <h:message for="r-spinner" styleClass="error"/>
@@ -128,10 +132,12 @@
                                 <div class="full-width d-flex justify-content-space-around">
                                     <div class="input-wrapper">
                                         <h:commandButton value="Отправить"
+                                                         action="#{controllerBean.submit}"
                                                          styleClass="cmd-btn liquid-glass text select-header liquid-glass-btn"/>
                                     </div>
                                     <div>
                                         <h:commandButton value="Очистить"
+                                                         action="#{controllerBean.clear}"
                                                          immediate="true"
                                                          styleClass="cmd-btn liquid-glass text select-header liquid-glass-btn"/>
                                     </div>
@@ -154,6 +160,32 @@
         <div id="right-div" class="d-flex">
             <div class="full-width full-height d-flex liquid-glass" id="scroll-table">
                 <div class="full-height liquid-glass-btn liquid-glass" id="div-mover"></div>
+                <h:dataTable value="#{controllerBean.points}" var="res" styleClass="full-width" id="result-table">
+                    <h:column>
+                        <f:facet name="header">X</f:facet>
+                        #{res.x}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Y</f:facet>
+                        #{res.y}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">R</f:facet>
+                        #{res.r}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Время выполнения</f:facet>
+                        #{res.beautifulDuration()}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Дата</f:facet>
+                        #{res.beautifulDate()}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Попадание (Y/N)</f:facet>
+                        #{res.check ? 'Y' : 'N'}
+                    </h:column>
+                </h:dataTable>
             </div>
         </div>
     </div>
@@ -161,8 +193,9 @@
     <!-- Подключение JS через JSF -->
     <script type="module" src="#{resource['js/graphOverlay.js']}"></script>
     <script type="module" src="#{resource['js/logic.js']}"></script>
-    <script src="#{resource['js/validation.js']}"></script>
     <script src="#{resource['js/inputForms.js']}"></script>
+    <script src="#{resource['js/graph.js']}"></script>
+    <script src="#{resource['js/graphOverlay.js']}"></script>
     <h:outputScript library="js" name="scrolls.js" type="module"/>
 </h:body>
 </html>

@@ -1,6 +1,3 @@
-import {drawGraph} from "./graph.js"
-import {clearAllPoints, renderAllPoints} from "./graphOverlay.js";
-
 let selected = null;
 const home = "http://localhost:8080";
 
@@ -11,26 +8,26 @@ const home = "http://localhost:8080";
 //     }
 // });
 
-document.addEventListener("DOMContentLoaded", () => {
-    const xSelect = document.getElementById("x-select");
-    const yInput = document.getElementById("y-input");
-    const rSelect = document.getElementById("r-select");
-
-    const x = localStorage.getItem("xSelect");
-    if (x != null) {
-        xSelect.value = x;
-    }
-    const y = localStorage.getItem("yInput");
-    if (y != null) {
-        yInput.value = y;
-    }
-    const r = localStorage.getItem("rSelect");
-    if (r != null) {
-        rSelect.value = r;
-        drawGraph(r);
-        renderAllPoints(r);
-    }
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//     const xSelect = document.getElementById("x-select");
+//     const yInput = document.getElementById("y-input");
+//     const rSelect = document.getElementById("r-select");
+//
+//     const x = localStorage.getItem("xSelect");
+//     if (x != null) {
+//         xSelect.value = x;
+//     }
+//     const y = localStorage.getItem("yInput");
+//     if (y != null) {
+//         yInput.value = y;
+//     }
+//     const r = localStorage.getItem("rSelect");
+//     if (r != null) {
+//         rSelect.value = r;
+//         drawGraph(r);
+//         renderAllPoints(r);
+//     }
+// });
 
 document.addEventListener("DOMContentLoaded", () => {
     // const getUrl = home + "/api"
@@ -46,27 +43,22 @@ document.addEventListener("DOMContentLoaded", () => {
     //     console.log(error)
     // });
 
-    const rSelect = document.getElementById("r-select");
-
-    drawGraph(rSelect.value);
-    renderAllPoints(rSelect.value);
-
-    const xSelect = document.getElementById("x-select");
-    xSelect.addEventListener("change", () => {
-        localStorage.setItem("xSelect", xSelect.value);
-    });
-
-
-    const yInput = document.getElementById("y-input");
-    yInput.addEventListener("input", () => {
-        localStorage.setItem("yInput", yInput.value);
-    });
-
-
-    rSelect.addEventListener("change", (event) => {
-        localStorage.setItem("rSelect", event.target.value);
-        drawGraph(event.target.value);
-    });
+    // const xSelect = document.getElementById("x-select");
+    // xSelect.addEventListener("change", () => {
+    //     localStorage.setItem("xSelect", xSelect.value);
+    // });
+    //
+    //
+    // const yInput = document.getElementById("y-input");
+    // yInput.addEventListener("input", () => {
+    //     localStorage.setItem("yInput", yInput.value);
+    // });
+    //
+    //
+    // rSelect.addEventListener("change", (event) => {
+    //     localStorage.setItem("rSelect", event.target.value);
+    //     drawGraph(event.target.value);
+    // });
 
     // const sendBtn = document.getElementById("send-btn");
     // const sendError = document.getElementById("send-error");
