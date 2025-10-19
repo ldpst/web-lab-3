@@ -17,9 +17,9 @@ dependencies {
 
     implementation 'jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1'
     implementation 'jakarta.inject:jakarta.inject-api:2.0.1'
-
-    implementation 'jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1'
     implementation 'org.jboss.weld.servlet:weld-servlet-shaded:6.0.0.Final'
+
+    implementation 'org.primefaces:primefaces:13.0.1:jakarta'
 }
 
 tasks.withType(JavaCompile) {
