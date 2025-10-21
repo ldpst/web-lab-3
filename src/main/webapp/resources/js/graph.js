@@ -6,13 +6,13 @@ function drawGraph(R) {
     const svg = `
     <svg width="${size}" height="${size}">
       <!-- Фигуры -->
-      <polygon class="figures" points="${center},${center} ${center - R*scale},${center} ${center},${center - R*scale/2}" fill="lightblue" stroke="black"/>
-      <rect class="figures" x="${center}" y="${center}" width="${R*scale}" height="${R*scale}" fill="lightgreen" stroke="black"/>
-      <circle class="figures" cx="${center}" cy="${center}" r="${R*scale/2}" clip-path="url(#half-circle)" fill="lightyellow" stroke="black"/>
+      <polygon class="figures" points="${center},${center} ${center + R*scale},${center} ${center},${center + R*scale}" fill="#aed9eb" stroke="black"/>
+      <rect class="figures" x="${center - R*scale/2}" y="${center}" width="${R*scale/2}" height="${R*scale}" fill="#aed9eb" stroke="black"/>
+      <circle class="figures" cx="${center}" cy="${center}" r="${R*scale/2}" clip-path="url(#half-circle)" fill="#aed9eb" stroke="black"/>
 
       <defs>
         <clipPath id="half-circle">
-          <rect x="${center}" y="${center - R*scale}" width="${R*scale}" height="${R*scale}"/>
+          <rect x="${center - R*scale}" y="${center - R*scale}" width="${R*scale}" height="${R*scale}"/>
         </clipPath>
       </defs>
 

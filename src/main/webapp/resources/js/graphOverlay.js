@@ -124,8 +124,6 @@ function shoot(x, y, R) {
     let r = parseFloat(R);
     console.log(x, y, r);
     const form = document.createElement("form");
-    form.method = "POST";
-    form.action = "/api";
 
     let data = {"x": x, "y": y, "r": r}
     for (const key in data) {
@@ -143,12 +141,12 @@ function shoot(x, y, R) {
 }
 
 function checkY(str, error) {
-    if (-5 <= Number(str) && Number(str) <= 3) {
+    if (-3 <= Number(str) && Number(str) <= 5) {
         error.style.display = "none";
         return true;
     } else {
         error.style.display = "block";
-        error.textContent = "❌ Недопустимое значение y (от -5 до 3)";
+        error.textContent = "❌ Недопустимое значение y (от -3 до 5)";
         setTimeout(() => {
             error.style.display = "none";
         },3000)
