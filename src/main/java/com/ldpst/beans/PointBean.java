@@ -18,6 +18,9 @@ public class PointBean implements Serializable {
     @Inject
     private ControllerBean controllerBean;
 
+    @Inject
+    private CheckerBean checkerBean;
+
     public PointBean() {
     }
 
@@ -60,7 +63,7 @@ public class PointBean implements Serializable {
         p.setR(r);
 
         p.setDate(localDateTime);
-        p.setCheck(false);
+        p.setCheck(checkerBean.check(x, y, r));
 
         p.setDuration(System.nanoTime() - start);
 
