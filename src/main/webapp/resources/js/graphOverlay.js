@@ -72,13 +72,7 @@ let pointsGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
 overlaySvg.appendChild(pointsGroup);
 
 function renderAllPoints(newR) {
-    const rect = overlaySvg.getBoundingClientRect();
-    console.log("SVG bounding rect:", rect);
-
-    // Также проверьте viewBox
-    const viewBox = overlaySvg.getAttribute('viewBox');
-    console.log("SVG viewBox:", viewBox);
-
+    console.log("!R: ", newR);
     R = newR;
     while (pointsGroup.firstChild) {
         pointsGroup.removeChild(pointsGroup.firstChild);
@@ -93,12 +87,20 @@ function renderAllPoints(newR) {
         circle.setAttribute("cx", pixelCoords.px);
         circle.setAttribute("cy", pixelCoords.py);
         circle.setAttribute("r", 4);
-        circle.setAttribute("fill", point.color || "red");
+        circle.setAttribute("fill", calcShoot(point.x, point.y, R) ? "green" : "red");
         circle.setAttribute("title", `X=${point.x.toFixed(2)}, Y=${point.y.toFixed(2)}`);
 
         pointsGroup.appendChild(circle);
     });
     savePoints(points);
+}
+
+function calcShoot(x, y, r) {
+    const isTriangle = (x >= 0) && (x <= r) && (y <= 0) && (y >= x - r);
+    const isRectangle = (x <= 0) && (x >= -r / 2) && (y <= 0) && (y >= -r);
+    const isCircle = (x <= 0) && (y >= 0) && (x * x + y * y <= (r / 2) * (r / 2));
+
+    return isTriangle || isRectangle || isCircle;
 }
 
 overlaySvg.addEventListener("click", (e) => {
@@ -112,6 +114,10 @@ overlaySvg.addEventListener("click", (e) => {
     let py = e.clientY - rect.top;
 
     let coords = toGraphCoords(px, py, width, height);
+
+    if (!checkY(coords.y.toFixed(3), overlayError)) {
+        return;
+    }
 
     const newPoint = {
         x: parseFloat(coords.x.toFixed(3)),
@@ -130,18 +136,14 @@ overlaySvg.addEventListener("click", (e) => {
 const overlayError = document.getElementById("overlay-error");
 
 function shoot(x, y, R) {
-    if (!checkY(y, overlayError)) {
-        return;
-    }
-
     let r = parseFloat(R);
     console.log(x, y, r);
     const form = document.createElement("form");
 
     addPointRemote([
-        { name: 'x', value: x },
-        { name: 'y', value: y },
-        { name: 'r', value: r }
+        {name: 'x', value: x},
+        {name: 'y', value: y},
+        {name: 'r', value: r}
     ]);
 }
 
@@ -154,7 +156,7 @@ function checkY(str, error) {
         error.textContent = "❌ Недопустимое значение y (от -3 до 5)";
         setTimeout(() => {
             error.style.display = "none";
-        },3000)
+        }, 3000)
         return false;
     }
 }
@@ -168,7 +170,7 @@ function toGraphCoords(px, py, width, height) {
 
     const x = (px - cx) / actualScale;
     const y = -(py - cy) / actualScale;
-    return { x, y };
+    return {x, y};
 }
 
 function toPixelCoords(x, y, width, height) {

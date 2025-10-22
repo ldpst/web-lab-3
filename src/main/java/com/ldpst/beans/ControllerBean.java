@@ -3,6 +3,7 @@ package com.ldpst.beans;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.primefaces.PrimeFaces;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -27,6 +28,7 @@ public class ControllerBean implements Serializable {
 
     public void clear() {
         points.clear();
+        PrimeFaces.current().executeScript("");
     }
 
     public void addPoint(Point point) {
