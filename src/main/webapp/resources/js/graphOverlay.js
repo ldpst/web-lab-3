@@ -2,17 +2,28 @@ const overlaySvg = document.getElementById("overlay-svg");
 let rInput = document.getElementById("input-form:r-spinner_input");
 let R = rInput.value;
 
-// function savePoints(points) {
-//     localStorage.setItem('savedPoints', JSON.stringify(points));
-// }
-//
-// function loadPoints() {
-//     const saved = localStorage.getItem('savedPoints');
-//     return saved ? JSON.parse(saved) : [];
-// }
+function savePoints(points) {
+    localStorage.setItem('savedPoints', JSON.stringify(points));
+}
 
-// let points = loadPoints();
+function loadPoints() {
+    const saved = localStorage.getItem('savedPoints');
+    return saved ? JSON.parse(saved) : [];
+}
+
 let points = [];
+
+document.addEventListener("DOMContentLoaded", () => {
+    points = loadPoints();
+
+    rInput = document.getElementById("input-form:r-spinner_input");
+    R = parseFloat(rInput.value);
+
+    renderAllPoints(R);
+
+    const clearBtn = document.getElementById("input-form:clear-btn");
+    clearBtn.addEventListener("click", clearAllPoints);
+});
 
 function getSvgSize() {
     const rect = overlaySvg.getBoundingClientRect();
@@ -61,6 +72,13 @@ let pointsGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
 overlaySvg.appendChild(pointsGroup);
 
 function renderAllPoints(newR) {
+    const rect = overlaySvg.getBoundingClientRect();
+    console.log("SVG bounding rect:", rect);
+
+    // Также проверьте viewBox
+    const viewBox = overlaySvg.getAttribute('viewBox');
+    console.log("SVG viewBox:", viewBox);
+
     R = newR;
     while (pointsGroup.firstChild) {
         pointsGroup.removeChild(pointsGroup.firstChild);
@@ -80,6 +98,7 @@ function renderAllPoints(newR) {
 
         pointsGroup.appendChild(circle);
     });
+    savePoints(points);
 }
 
 overlaySvg.addEventListener("click", (e) => {
@@ -103,9 +122,6 @@ overlaySvg.addEventListener("click", (e) => {
     };
 
     points.push(newPoint);
-
-    // savePoints(points);
-
     renderAllPoints(R);
 
     shoot(coords.x.toFixed(3), coords.y.toFixed(3), R);
@@ -169,10 +185,6 @@ function toPixelCoords(x, y, width, height) {
 
 function clearAllPoints() {
     points = [];
-    // savePoints(points);
+    localStorage.removeItem('savedPoints');
     renderAllPoints(R);
 }
-
-document.addEventListener("DOMContentLoaded", ()=>{
-    renderAllPoints(rInput.value);
-});

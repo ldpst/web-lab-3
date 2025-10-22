@@ -39,9 +39,9 @@
                                     actionListener="#{point.send(param.x, param.y, param.r)}"
                                     process="@this"
                                     update="result-table">
-                                <f:param name="x" value="" />
-                                <f:param name="y" value="" />
-                                <f:param name="r" value="" />
+                                <f:param name="x" value=""/>
+                                <f:param name="y" value=""/>
+                                <f:param name="r" value=""/>
                             </p:remoteCommand>
 
                             <div id="inputs" class="liquid-glass">
@@ -146,7 +146,8 @@
                                                          styleClass="cmd-btn liquid-glass text select-header liquid-glass-btn"/>
                                     </div>
                                     <div>
-                                        <h:commandButton value="Очистить"
+                                        <h:commandButton id="clear-btn"
+                                                         value="Очистить"
                                                          action="#{controllerBean.clear}"
                                                          immediate="true"
                                                          styleClass="cmd-btn liquid-glass text select-header liquid-glass-btn"/>
@@ -156,11 +157,11 @@
                         </h:form>
 
                         <!-- График -->
-                        <div id="graph-container" class="liquid-glass" data-r="2">
-                            <div id="graph-svg" style="width: 100%; height: 100%"></div>
-                            <div id="overlay-svg" style="width: 100%; height: 100%"></div>
+                        <h:panelGroup id="graph-container" class="liquid-glass" data-r="2" layout="block">
+                            <svg id="graph-svg" style="width: 100%; height: 100%"></svg>
+                            <svg id="overlay-svg" style="width: 100%; height: 100%" onclick="updatePoints()"></svg>
                             <div id="overlay-error" class="error">❌ Введите в формате числа (от -5 до 3)</div>
-                        </div>
+                        </h:panelGroup>
                     </div>
                 </div>
             </div>
