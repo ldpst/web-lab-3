@@ -84,9 +84,7 @@ function renderAllPoints(newR) {
 
 overlaySvg.addEventListener("click", (e) => {
     rInput = document.getElementById("input-form:r-spinner_input");
-    console.log("rInput " + rInput)
     R = rInput.value;
-    console.log("R " + R);
 
     const rect = overlaySvg.getBoundingClientRect();
     const {width, height} = getSvgSize();
@@ -110,7 +108,6 @@ overlaySvg.addEventListener("click", (e) => {
 
     renderAllPoints(R);
 
-    console.log("Clicked:", coords);
     shoot(coords.x.toFixed(3), coords.y.toFixed(3), R);
 });
 
@@ -125,19 +122,11 @@ function shoot(x, y, R) {
     console.log(x, y, r);
     const form = document.createElement("form");
 
-    let data = {"x": x, "y": y, "r": r}
-    for (const key in data) {
-        if (data.hasOwnProperty(key)) {
-            const input = document.createElement("input");
-            input.type = "hidden";
-            input.name = key;
-            input.value = data[key];
-            form.appendChild(input);
-        }
-    }
-
-    document.body.appendChild(form);
-    form.submit();
+    addPointRemote([
+        { name: 'x', value: x },
+        { name: 'y', value: y },
+        { name: 'r', value: r }
+    ]);
 }
 
 function checkY(str, error) {
@@ -155,21 +144,26 @@ function checkY(str, error) {
 }
 
 function toGraphCoords(px, py, width, height) {
-    const baseScale = 440 / 30 * R;
-    const actualScale = (width / 440) * baseScale;
+    const graphRange = R * 2.5;
+    const actualScale = (width / 2) / graphRange;
 
-    let x = (px - width / 2) / actualScale;
-    let y = -(py - height / 2) / actualScale;
-    return {x, y};
+    const cx = width / 2;
+    const cy = height / 2;
+
+    const x = (px - cx) / actualScale;
+    const y = -(py - cy) / actualScale;
+    return { x, y };
 }
 
 function toPixelCoords(x, y, width, height) {
-    const baseScale = 400 / 30 * R;
-    const actualScale = (width / 440) * baseScale;
+    const graphRange = R * 2.5;
+    const actualScale = (width / 2) / graphRange;
 
-    let px = x * actualScale + width / 2;
-    let py = -y * actualScale + height / 2;
-    console.log(px, py);
+    const cx = width / 2;
+    const cy = height / 2;
+
+    let px = x * actualScale + cx;
+    let py = -y * actualScale + cy;
     return {px, py};
 }
 

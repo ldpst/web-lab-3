@@ -14,9 +14,6 @@ import java.util.List;
 public class ControllerBean implements Serializable {
     private List<Point> points = new ArrayList<Point>();
 
-    @Inject
-    private PointBean point;
-
     public ControllerBean() {
     }
 
@@ -28,25 +25,11 @@ public class ControllerBean implements Serializable {
         this.points = points;
     }
 
-    public void submit() {
-        long start = System.nanoTime();
-        LocalDateTime localDateTime = LocalDateTime.now();
-
-        Point p = new Point();
-
-        p.setX(point.getX());
-        p.setY(point.getY());
-        p.setR(point.getR());
-
-        p.setDate(localDateTime);
-        p.setCheck(false);
-
-        p.setDuration(System.nanoTime() - start);
-
-        points.add(p);
-    }
-
     public void clear() {
         points.clear();
+    }
+
+    public void addPoint(Point point) {
+        points.add(point);
     }
 }

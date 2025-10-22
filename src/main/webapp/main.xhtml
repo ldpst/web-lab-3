@@ -34,6 +34,16 @@
                 <div id="v-center-wrapper">
                     <div id="scroll-div">
                         <h:form id="input-form">
+                            <p:remoteCommand
+                                    name="addPointRemote"
+                                    actionListener="#{point.send(param.x, param.y, param.r)}"
+                                    process="@this"
+                                    update="result-table">
+                                <f:param name="x" value="" />
+                                <f:param name="y" value="" />
+                                <f:param name="r" value="" />
+                            </p:remoteCommand>
+
                             <div id="inputs" class="liquid-glass">
                                 <!-- X -->
                                 <div class="full-width d-flex justify-content-start">
@@ -132,7 +142,7 @@
                                 <div class="full-width d-flex justify-content-space-around">
                                     <div class="input-wrapper">
                                         <h:commandButton value="Отправить"
-                                                         action="#{controllerBean.submit}"
+                                                         action="#{point.submit}"
                                                          styleClass="cmd-btn liquid-glass text select-header liquid-glass-btn"/>
                                     </div>
                                     <div>
@@ -195,7 +205,6 @@
     <script type="module" src="#{resource['js/logic.js']}"></script>
     <script src="#{resource['js/inputForms.js']}"></script>
     <script src="#{resource['js/graph.js']}"></script>
-    <script src="#{resource['js/graphOverlay.js']}"></script>
     <h:outputScript library="js" name="scrolls.js" type="module"/>
 </h:body>
 </html>
