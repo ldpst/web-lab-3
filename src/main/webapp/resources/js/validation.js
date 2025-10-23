@@ -1,5 +1,3 @@
-import {makeNotification} from "./notification.js";
-
 function validateYInput() {
     const input = document.getElementById('input-form:y-input');
     const error = document.getElementById('input-form:y-error');

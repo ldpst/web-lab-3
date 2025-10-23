@@ -124,7 +124,6 @@ overlaySvg.addEventListener("click", (e) => {
         y: parseFloat(coords.y.toFixed(3)),
         r: parseFloat(R),
         timestamp: new Date().toISOString(),
-        color: "green"
     };
 
     points.push(newPoint);
@@ -133,12 +132,32 @@ overlaySvg.addEventListener("click", (e) => {
     shoot(coords.x.toFixed(3), coords.y.toFixed(3), R);
 });
 
+function onFormSubmitComplete(data) {
+    if (data.status === "success") {
+        const xInput = document.getElementById("input-form:x-input");
+        const yInput = document.getElementById("input-form:y-input");
+        const rInput = document.getElementById("input-form:r-spinner_input");
+
+        const x = parseFloat(xInput.value);
+        const y = parseFloat(yInput.value);
+        const r = parseFloat(rInput.value);
+
+        const newPoint = {
+            x: x,
+            y: y,
+            r: r,
+            timestamp: new Date().toISOString()
+        };
+
+        points.push(newPoint);
+        renderAllPoints(r);
+    }
+}
+
 const overlayError = document.getElementById("overlay-error");
 
 function shoot(x, y, R) {
     let r = parseFloat(R);
-    console.log(x, y, r);
-    const form = document.createElement("form");
 
     addPointRemote([
         {name: 'x', value: x},
