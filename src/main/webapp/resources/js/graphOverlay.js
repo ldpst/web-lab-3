@@ -103,6 +103,8 @@ function calcShoot(x, y, r) {
     return isTriangle || isRectangle || isCircle;
 }
 
+const overlayError = document.getElementById("overlay-error");
+
 overlaySvg.addEventListener("click", (e) => {
     rInput = document.getElementById("input-form:r-spinner_input");
     R = rInput.value;
@@ -115,7 +117,7 @@ overlaySvg.addEventListener("click", (e) => {
 
     let coords = toGraphCoords(px, py, width, height);
 
-    if (!checkY(coords.y.toFixed(3), overlayError)) {
+    if (!checkYValue(coords.y.toFixed(3))) {
         return;
     }
 
@@ -142,6 +144,15 @@ function onFormSubmitComplete(data) {
         const y = parseFloat(yInput.value);
         const r = parseFloat(rInput.value);
 
+        if (!checkX()) {
+            return;
+        }
+
+        if (!checkY()) {
+            return;
+        }
+
+
         const newPoint = {
             x: x,
             y: y,
@@ -154,8 +165,6 @@ function onFormSubmitComplete(data) {
     }
 }
 
-const overlayError = document.getElementById("overlay-error");
-
 function shoot(x, y, R) {
     let r = parseFloat(R);
 
@@ -164,20 +173,6 @@ function shoot(x, y, R) {
         {name: 'y', value: y},
         {name: 'r', value: r}
     ]);
-}
-
-function checkY(str, error) {
-    if (-3 <= Number(str) && Number(str) <= 5) {
-        error.style.display = "none";
-        return true;
-    } else {
-        error.style.display = "block";
-        error.textContent = "❌ Недопустимое значение y (от -3 до 5)";
-        setTimeout(() => {
-            error.style.display = "none";
-        }, 3000)
-        return false;
-    }
 }
 
 function toGraphCoords(px, py, width, height) {

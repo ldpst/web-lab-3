@@ -1,5 +1,6 @@
 package com.ldpst.beans;
 
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -11,8 +12,8 @@ import java.time.format.DateTimeFormatter;
 @Named("point")
 @SessionScoped
 public class PointBean implements Serializable {
-    private Double x;
-    private Double y;
+    private Double x = null;
+    private Double y = 1.0;
     private Double r = 1.0;
 
     @Inject
@@ -55,6 +56,10 @@ public class PointBean implements Serializable {
     public void send(Double x, Double y, Double r) {
         long start = System.nanoTime();
         LocalDateTime localDateTime = LocalDateTime.now();
+
+        if (x == null || y == null || r == null) {
+            return;
+        }
 
         Point p = new Point();
 
