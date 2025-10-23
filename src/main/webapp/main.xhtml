@@ -52,7 +52,7 @@
                                     <div class="btns liquid-glass flex-direction-column">
                                         <span class="select-header text">Выберите X:</span>
                                         <div class="full-width d-flex justify-content-space-between">
-                                            <input type="hidden" id="input-form:x-input" name="x" />
+                                            <input type="hidden" id="input-form:x-input" name="x"/>
                                             <h:commandButton styleClass="x-btn liquid-glass-btn" value="-3"
                                                              type="button"
                                                              action="#{point.setX(-3)}" onclick="switchX(this)">
@@ -123,9 +123,9 @@
                                                          requiredMessage="Поле Y не может быть пустым"
                                                          validatorMessage="Введите Y в формате числа (от -3 до 5)"
                                                          converterMessage="Введите Y как корректное число">
-                                                <f:converter converterId="bigDecimalConverter" />
-                                                <f:validator validatorId="bigDecimalRangeValidator" />
-                                                <p:ajax event="blur" update="y-error" oncomplete="showYError()" />
+                                                <f:converter converterId="bigDecimalConverter"/>
+                                                <f:validator validatorId="bigDecimalRangeValidator"/>
+                                                <p:ajax event="blur" update="y-error" oncomplete="showYError()"/>
                                             </h:inputText>
                                             <h:message id="y-error" for="y-input" style="display: none"/>
                                         </div>
@@ -158,7 +158,8 @@
                                         <h:commandButton value="Отправить"
                                                          action="#{point.submit}"
                                                          styleClass="cmd-btn liquid-glass text select-header liquid-glass-btn">
-                                            <f:ajax execute="@form" render="result-table" onevent="onFormSubmitComplete"/>
+                                            <f:ajax execute="@form" render="result-table"
+                                                    onevent="onFormSubmitComplete"/>
                                         </h:commandButton>
                                     </div>
                                     <div>
@@ -188,39 +189,40 @@
         <div id="right-div" class="d-flex">
             <div class="full-width full-height d-flex" id="scroll-table">
                 <div class="full-height liquid-glass-btn liquid-glass" id="div-mover"></div>
-                <h:dataTable value="#{controllerBean.points}" var="res" styleClass="full-width" id="result-table">
-                    <h:column>
-                        <f:facet name="header">X</f:facet>
-                        #{res.x}
-                    </h:column>
-                    <h:column styleClass="y-column">
-                        <f:facet name="header">Y</f:facet>
-                        #{res.y}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">R</f:facet>
-                        #{res.r}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Время выполнения</f:facet>
-                        #{res.beautifulDuration()}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Дата</f:facet>
-                        #{res.beautifulDate()}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Попадание (Y/N)</f:facet>
-                        #{res.check ? 'Y' : 'N'}
-                    </h:column>
-                </h:dataTable>
+                <div id="scroll-table-div">
+                    <h:dataTable value="#{controllerBean.points}" var="res" styleClass="full-width" id="result-table">
+                        <h:column>
+                            <f:facet name="header">X</f:facet>
+                            #{res.x}
+                        </h:column>
+                        <h:column styleClass="y-column">
+                            <f:facet name="header">Y</f:facet>
+                            #{res.y}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">R</f:facet>
+                            #{res.r}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Время выполнения</f:facet>
+                            #{res.beautifulDuration()}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Дата</f:facet>
+                            #{res.beautifulDate()}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Попадание (Y/N)</f:facet>
+                            #{res.check ? 'Y' : 'N'}
+                        </h:column>
+                    </h:dataTable>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Подключение JS через JSF -->
     <script src="#{resource['js/graphOverlay.js']}"></script>
-    <script type="module" src="#{resource['js/logic.js']}"></script>
     <script src="#{resource['js/inputForms.js']}"></script>
     <script src="#{resource['js/graph.js']}"></script>
     <script src="#{resource['js/notification.js']}"></script>

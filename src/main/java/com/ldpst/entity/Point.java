@@ -1,20 +1,35 @@
-package com.ldpst.beans;
+package com.ldpst.entity;
+
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@Entity
+@Table(name = "points")
 public class Point {
+    @Column(precision = 19, scale = 4)
     private BigDecimal x;
+    @Column(precision = 19, scale = 4)
     private BigDecimal y;
+    @Column(precision = 19, scale = 4)
     private BigDecimal r;
 
     private long duration;
+
+    @Column(name = "created_date")
     private LocalDateTime date;
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    @Transient
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
+    @Column(name = "is_hit")
     private boolean check;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     public Point() {
     }
@@ -81,5 +96,13 @@ public class Point {
 
     public String beautifulDuration() {
         return ((duration / 1e6) * 1e6) / 1e6 + " ms";
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

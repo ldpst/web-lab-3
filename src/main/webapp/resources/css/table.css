@@ -41,6 +41,7 @@ td, th {
     white-space: normal;
     overflow-wrap: anywhere;
     word-break: break-word;
+    min-width: 60px;
 }
 
 #scroll-table {
@@ -52,14 +53,35 @@ td, th {
     transition: transform 0.4s ease;
 
 
-    border-radius: 30px 0 30px 0;
+    border-radius: 30px 0 0 30px;
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    box-shadow:
-            inset 0 0 15px rgba(255, 255, 255, 0.3),
-            0 0 30px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.3),
+    0 0 30px rgba(0, 0, 0, 0.2);
     border: 1px solid black;
+}
+
+#scroll-table-div {
+    width: 100%;
+    overflow-y: auto;
+    max-height: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+#scroll-table-div::-webkit-scrollbar {
+    height: 8px;
+    width: 0;
+}
+
+#scroll-table-div::-webkit-scrollbar-thumb:horizontal {
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 4px;
+}
+
+#scroll-table-div::-webkit-scrollbar-thumb:vertical {
+    background-color: transparent;
 }
 
 #scroll-table.close {

@@ -1,5 +1,6 @@
 package com.ldpst.beans;
 
+import com.ldpst.entity.Point;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
