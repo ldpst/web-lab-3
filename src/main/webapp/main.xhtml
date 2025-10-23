@@ -54,43 +54,52 @@
                                         <div class="full-width d-flex justify-content-space-between">
                                             <input type="hidden" id="input-form:x-input" name="x" />
                                             <h:commandButton styleClass="x-btn liquid-glass-btn" value="-3"
+                                                             type="button"
                                                              action="#{point.setX(-3)}" onclick="switchX(this)">
                                                 <f:ajax render="@none"/>
                                             </h:commandButton>
                                             <h:commandButton styleClass="x-btn liquid-glass-btn" value="-2"
+                                                             type="button"
                                                              action="#{point.setX(-2)}" onclick="switchX(this)">
                                                 <f:ajax render="@none"/>
                                             </h:commandButton>
                                             <h:commandButton styleClass="x-btn liquid-glass-btn" value="-1"
+                                                             type="button"
                                                              action="#{point.setX(-1)}" onclick="switchX(this)">
                                                 <f:ajax render="@none"/>
                                             </h:commandButton>
                                             <h:commandButton styleClass="x-btn liquid-glass-btn" value="0"
                                                              action="#{point.setX(0)}"
+                                                             type="button"
                                                              onclick="switchX(this)">
                                                 <f:ajax render="@none"/>
                                             </h:commandButton>
                                             <h:commandButton styleClass="x-btn liquid-glass-btn" value="1"
+                                                             type="button"
                                                              action="#{point.setX(1)}"
                                                              onclick="switchX(this)">
                                                 <f:ajax render="@none"/>
                                             </h:commandButton>
                                             <h:commandButton styleClass="x-btn liquid-glass-btn" value="2"
+                                                             type="button"
                                                              action="#{point.setX(2)}"
                                                              onclick="switchX(this)">
                                                 <f:ajax render="@none"/>
                                             </h:commandButton>
                                             <h:commandButton styleClass="x-btn liquid-glass-btn" value="3"
+                                                             type="button"
                                                              action="#{point.setX(3)}"
                                                              onclick="switchX(this)">
                                                 <f:ajax render="@none"/>
                                             </h:commandButton>
                                             <h:commandButton styleClass="x-btn liquid-glass-btn" value="4"
+                                                             type="button"
                                                              action="#{point.setX(4)}"
                                                              onclick="switchX(this)">
                                                 <f:ajax render="@none"/>
                                             </h:commandButton>
                                             <h:commandButton styleClass="x-btn liquid-glass-btn" value="5"
+                                                             type="button"
                                                              action="#{point.setX(5)}"
                                                              onclick="switchX(this)">
                                                 <f:ajax render="@none"/>
@@ -177,14 +186,14 @@
 
         <!-- Таблица результатов -->
         <div id="right-div" class="d-flex">
-            <div class="full-width full-height d-flex liquid-glass" id="scroll-table">
+            <div class="full-width full-height d-flex" id="scroll-table">
                 <div class="full-height liquid-glass-btn liquid-glass" id="div-mover"></div>
                 <h:dataTable value="#{controllerBean.points}" var="res" styleClass="full-width" id="result-table">
                     <h:column>
                         <f:facet name="header">X</f:facet>
                         #{res.x}
                     </h:column>
-                    <h:column>
+                    <h:column styleClass="y-column">
                         <f:facet name="header">Y</f:facet>
                         #{res.y}
                     </h:column>

@@ -72,7 +72,6 @@ let pointsGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
 overlaySvg.appendChild(pointsGroup);
 
 function renderAllPoints(newR) {
-    console.log("!R: ", newR);
     R = newR;
     while (pointsGroup.firstChild) {
         pointsGroup.removeChild(pointsGroup.firstChild);

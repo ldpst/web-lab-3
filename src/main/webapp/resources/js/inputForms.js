@@ -1,5 +1,3 @@
-import { Decimal } from "decimal.js";
-
 let xSelected = null;
 let xValue;
 
