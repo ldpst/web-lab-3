@@ -1,5 +1,6 @@
 package com.ldpst.beans;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 
@@ -8,12 +9,9 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 @Named("checker")
-@SessionScoped
+@ApplicationScoped
 public class CheckerBean implements Serializable {
-    public boolean check(Double xd, Double yd, Double rd) {
-        BigDecimal x = new BigDecimal(xd);
-        BigDecimal y = new BigDecimal(yd);
-        BigDecimal r = new BigDecimal(rd);
+    public boolean check(BigDecimal x, BigDecimal y, BigDecimal r) {
 
         BigDecimal halfR = r.divide(BigDecimal.valueOf(2), 10, RoundingMode.HALF_UP);
         BigDecimal halfX = x.divide(BigDecimal.valueOf(2), 10, RoundingMode.HALF_UP);

@@ -1,12 +1,13 @@
 package com.ldpst.beans;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Point {
-    private Double x;
-    private Double y;
-    private Double r;
+    private BigDecimal x;
+    private BigDecimal y;
+    private BigDecimal r;
 
     private long duration;
     private LocalDateTime date;
@@ -18,27 +19,27 @@ public class Point {
     public Point() {
     }
 
-    public Double getX() {
+    public BigDecimal getX() {
         return x;
     }
 
-    public void setX(Double x) {
+    public void setX(BigDecimal x) {
         this.x = x;
     }
 
-    public Double getY() {
+    public BigDecimal getY() {
         return y;
     }
 
-    public void setY(Double y) {
+    public void setY(BigDecimal y) {
         this.y = y;
     }
 
-    public Double getR() {
+    public BigDecimal getR() {
         return r;
     }
 
-    public void setR(Double r) {
+    public void setR(BigDecimal r) {
         this.r = r;
     }
 

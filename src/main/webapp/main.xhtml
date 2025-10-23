@@ -17,6 +17,8 @@
     <h:outputStylesheet library="css" name="wrappers.css"/>
     <h:outputStylesheet library="css" name="table.css"/>
     <h:outputStylesheet library="css" name="inputForms.css"/>
+
+    <script src="https://cdn.jsdelivr.net/npm/decimal.js@10.4.3/decimal.min.js"></script>
 </h:head>
 
 <h:body>
@@ -112,7 +114,8 @@
                                                          requiredMessage="Поле Y не может быть пустым"
                                                          validatorMessage="Введите Y в формате числа (от -3 до 5)"
                                                          converterMessage="Введите Y как корректное число">
-                                                <f:validateDoubleRange minimum="-3" maximum="5"/>
+                                                <f:converter converterId="bigDecimalConverter" />
+                                                <f:validator validatorId="bigDecimalRangeValidator" />
                                                 <p:ajax event="blur" update="y-error" oncomplete="showYError()" />
                                             </h:inputText>
                                             <h:message id="y-error" for="y-input" style="display: none"/>

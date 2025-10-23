@@ -1,3 +1,5 @@
+import { Decimal } from "decimal.js";
+
 let xSelected = null;
 let xValue;
 
@@ -45,16 +47,27 @@ function checkY() {
 }
 
 function checkYValue(str) {
-    if (typeof str !== "string" || str.trim() === "" || isNaN(str) || isNaN(Number(str))) {
-        makeNotification("Введите значение Y")
+    if (typeof str !== "string" || str.trim() === "") {
+        makeNotification("Введите значение Y");
         return false;
+    }
+
+    let y;
+    try {
+        y = new Decimal(str);
+    } catch (e) {
+        makeNotification("Введите Y в формате числа (от -3 до 5)");
+        return false;
+    }
+
+    const min = new Decimal(-3);
+    const max = new Decimal(5);
+
+    if (y.greaterThanOrEqualTo(min) && y.lessThanOrEqualTo(max)) {
+        return true;
     } else {
-        if (-3 <= Number(str) && Number(str) <= 5) {
-            return true;
-        } else {
-            makeNotification("Введите Y в формате числа (от -3 до 5)");
-            return false;
-        }
+        makeNotification("Введите Y в формате числа (от -3 до 5)");
+        return false;
     }
 }
 
