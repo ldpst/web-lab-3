@@ -9,15 +9,15 @@ export class Clock {
         this.#second = second;
     }
 
-    show = () => {
-        const date = new Date();
+    animate(timeString) {
+        const [h, m, s] = timeString.split(" : ").map(Number);
 
-        const hour = ((date.getHours() + 11) % 12 + 1) * 30;
-        const minute = date.getMinutes() * 6;
-        const second = date.getSeconds() * 6;
+        const hourDeg = ((h % 12) + m / 60) * 30;
+        const minuteDeg = m * 6;
+        const secondDeg = s * 6;
 
-        this.#hour.style.transform = `rotate(${hour}deg)`;
-        this.#minute.style.transform = `rotate(${minute}deg)`;
-        this.#second.style.transform = `rotate(${second}deg)`;
-    };
+        this.#hour.style.transform = `rotate(${hourDeg}deg)`;
+        this.#minute.style.transform = `rotate(${minuteDeg}deg)`;
+        this.#second.style.transform = `rotate(${secondDeg}deg)`;
+    }
 }

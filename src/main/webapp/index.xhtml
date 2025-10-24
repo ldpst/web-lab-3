@@ -1,56 +1,62 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="jakarta.faces.html">
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+
 <h:head>
     <title>Hello JSF</title>
     <h:outputStylesheet library="css" name="clock.css"/>
-    <script type="module" src="resources/js/indexPage.js"/>
+    <script type="module" src="#{request.contextPath}/resources/js/indexPage.js"></script>
 </h:head>
+
 <h:body>
-    <div class="d-flex justify-content-center" id="main-container">
-        <div class="clock">
-            <div class="wrap">
-                <span class="hour"/>
-                <span class="minute"/>
-                <span class="second"/>
-                <span class="dot"/>
-            </div>
-        </div>
-        <div id="padding-30px"/>
-        <div id="right-div" class="d-flex flex-direction-column">
-            <div id="time-container" class="d-flex flex-direction-column">
-                <div id="date-text-container">
-                    <div class="date">
-                        <span id="day-name">Day</span>,
-                        <span id="month">Month</span>
-                        <span id="day-number">00</span>,
-                        <span id="year">Year</span>
-                    </div>
-                    <div class="time">
-                        <span id="hour">00</span>
-                        <span>:</span>
-                        <span id="minutes">00</span>
-                        <span>:</span>
-                        <span id="seconds">00</span>
-                    </div>
-                </div>
-                <div id="name-text-container">
-                    <span>Выполнил: </span>
-                    <span>Мельник </span>
-                    <span>Фёдор </span>
-                    <span>Александрович </span>
-                    <br/>
-                    <span>Группа: </span>
-                    <span>P3206 </span>
-                    <br/>
-                    <span>ISU: </span>
-                    <span>466690 </span>
+    <h:form id="clockForm">
+
+        <p:poll interval="1"
+                update="dateText timeText"
+        />
+
+        <div class="d-flex justify-content-center" id="main-container">
+            <div class="clock">
+                <div class="wrap">
+                    <span class="hour"/>
+                    <span class="minute"/>
+                    <span class="second"/>
+                    <span class="dot"/>
                 </div>
             </div>
-            <a href="/main.xhtml">
-                <button id="main-btn">Главная страница</button>
-            </a>
+
+            <div id="padding-30px"></div>
+
+            <div id="right-div" class="d-flex flex-direction-column">
+                <div id="time-container" class="d-flex flex-direction-column">
+                    <div id="date-text-container">
+                        <div class="date">
+                            <h:panelGroup id="dateText">
+                                #{timeBean.formattedDate}
+                            </h:panelGroup>
+                        </div>
+
+                        <div class="time">
+                            <h:panelGroup id="timeText">
+                                #{timeBean.formattedTime}
+                            </h:panelGroup>
+                        </div>
+
+                        <div id="name-text-container">
+                            Выполнил: Мельник Фёдор Александрович<br/>
+                            Группа: P3206<br/>
+                            ISU: 466690<br/>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="/main.xhtml">
+                    <button id="main-btn">Главная страница</button>
+                </a>
+            </div>
         </div>
-    </div>
+
+    </h:form>
 </h:body>
 </html>
