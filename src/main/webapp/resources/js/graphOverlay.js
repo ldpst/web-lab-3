@@ -1,6 +1,6 @@
 const overlaySvg = document.getElementById("overlay-svg");
 let rInput = document.getElementById("input-form:r-spinner_input");
-let R = rInput.value;
+let R =  Math.round(parseFloat(rInput.value) * 10) / 10;
 
 function savePoints(points) {
     localStorage.setItem('savedPoints', JSON.stringify(points));
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     points = loadPoints();
 
     rInput = document.getElementById("input-form:r-spinner_input");
-    R = parseFloat(rInput.value);
+    R =  Math.round(parseFloat(rInput.value) * 10) / 10;
 
     renderAllPoints(R);
 
@@ -72,7 +72,7 @@ let pointsGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
 overlaySvg.appendChild(pointsGroup);
 
 function renderAllPoints(newR) {
-    R = newR;
+    R = Math.round(parseFloat(newR) * 10) / 10;
     while (pointsGroup.firstChild) {
         pointsGroup.removeChild(pointsGroup.firstChild);
     }
@@ -106,7 +106,7 @@ const overlayError = document.getElementById("overlay-error");
 
 overlaySvg.addEventListener("click", (e) => {
     rInput = document.getElementById("input-form:r-spinner_input");
-    R = rInput.value;
+    R =  Math.round(parseFloat(rInput.value) * 10) / 10;;
 
     const rect = overlaySvg.getBoundingClientRect();
     const {width, height} = getSvgSize();
@@ -141,7 +141,7 @@ function onFormSubmitComplete(data) {
 
         const x = parseFloat(xInput.value);
         const y = parseFloat(yInput.value);
-        const r = parseFloat(rInput.value);
+        const r = Math.round(parseFloat(rInput.value) * 10) / 10;
 
         if (!checkX()) {
             return;

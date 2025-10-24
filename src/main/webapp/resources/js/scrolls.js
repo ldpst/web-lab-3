@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", () => {
     const mover = document.getElementById("div-mover");
     const table = document.getElementById("scroll-table");
 

@@ -1,4 +1,5 @@
 function drawGraph(R) {
+    R = Math.round(parseFloat(R) * 10) / 10;
     const size = 440;
     const center = size / 2;
     const scale = 88 / R;
