@@ -165,9 +165,11 @@ html, body {
 }
 
 .back-btn {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
     z-index: 1000;
+    width: 160px;
+    height: 60px;
     padding: 0.5em 1em;
 }

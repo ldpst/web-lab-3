@@ -130,7 +130,7 @@ html {
     gap: 20px;
 }
 
-main-btn {
+.main-btn {
     font-family: "Century Gothic", serif;
     color: #e8e3e3;
     background-color: #494746;
@@ -142,7 +142,7 @@ main-btn {
     font-size: 30px;
 }
 
-#main-btn:hover {
+.main-btn:hover {
     background-color: #5c5b5b;
 }
 

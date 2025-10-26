@@ -7,7 +7,7 @@ const clock = new Clock({
 });
 
 function syncClockWithBackend() {
-    const timeText = document.getElementById('timeText').innerText;
+    const timeText = document.getElementById("clockForm:timeText").innerText;
     if (!timeText) return;
 
     clock.animate(timeText);
