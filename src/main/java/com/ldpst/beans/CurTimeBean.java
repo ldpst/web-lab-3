@@ -3,13 +3,9 @@ package com.ldpst.beans;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -17,39 +13,33 @@ import java.util.concurrent.TimeUnit;
 @Named("timeBean")
 @ApplicationScoped
 public class CurTimeBean implements Serializable {
-    private String formattedDate;
-    private String formattedTime;
+
+    private volatile long currentTimestamp;
 
     private ScheduledExecutorService scheduler;
-
-    private final SimpleDateFormat dateFormat =
-            new SimpleDateFormat("EEEE, MMMM dd, yyyy", new Locale("ru"));
-    private final SimpleDateFormat timeFormat =
-            new SimpleDateFormat("HH : mm : ss");
 
     @PostConstruct
     public void init() {
         scheduler = Executors.newSingleThreadScheduledExecutor();
-        scheduler.scheduleAtFixedRate(this::updateDateTime, 0, 6, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(this::updateTimestamp, 0, 6, TimeUnit.SECONDS);
     }
 
     @PreDestroy
     public void destroy() {
-        scheduler.shutdownNow();
+        if (scheduler != null) {
+            scheduler.shutdownNow();
+        }
     }
 
-    private synchronized void updateDateTime() {
-        Date now = new Date();
-        formattedDate = dateFormat.format(now);
-        formattedTime = timeFormat.format(now);
+    private void updateTimestamp() {
+        currentTimestamp = System.currentTimeMillis();
     }
 
-    public synchronized String getFormattedDate() {
-        return formattedDate;
+    public long getCurrentTimestamp() {
+        return currentTimestamp;
     }
 
-    public synchronized String getFormattedTime() {
-        return formattedTime;
+    public void setCurrentTimestamp(long currentTimestamp) {
+        this.currentTimestamp = currentTimestamp;
     }
 }
-

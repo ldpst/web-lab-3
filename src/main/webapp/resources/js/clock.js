@@ -10,7 +10,7 @@ export class Clock {
     }
 
     animate(timeString) {
-        const [h, m, s] = timeString.split(" : ").map(Number);
+        const [h, m, s] = timeString.split(":").map(Number);
 
         const circleDeg = 360;
         const hoursInCircle = 12;

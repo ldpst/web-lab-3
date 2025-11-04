@@ -13,8 +13,11 @@
     <h:form id="clockForm">
 
         <p:poll interval="1"
-                update="dateText timeText"
+                update="serverTimestamp dateText timeText"
+                oncomplete="updateTime()"
         />
+
+        <h:outputText id="serverTimestamp" value="#{timeBean.currentTimestamp}" style="display:none;" />
 
         <div class="d-flex justify-content-center" id="main-container">
             <div class="clock">
@@ -33,13 +36,13 @@
                     <div id="date-text-container">
                         <div class="date">
                             <h:panelGroup id="dateText">
-                                #{timeBean.formattedDate}
+                                <span id="js-date"></span>
                             </h:panelGroup>
                         </div>
 
                         <div class="time">
                             <h:panelGroup id="timeText">
-                                #{timeBean.formattedTime}
+                                <span id="js-time"></span>
                             </h:panelGroup>
                         </div>
 

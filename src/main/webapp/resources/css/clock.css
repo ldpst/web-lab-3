@@ -118,8 +118,12 @@ html {
     font-size: 30px;
 }
 
-#date-text {
-    text-transform: capitalize;
+#js-date {
+    display: inline-block;
+}
+
+#js-date::first-letter {
+    text-transform: uppercase;
 }
 
 #name-text-container {
