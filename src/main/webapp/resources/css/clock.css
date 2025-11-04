@@ -117,6 +117,11 @@ html {
 #date-text-container {
     font-size: 30px;
 }
+
+#date-text {
+    text-transform: capitalize;
+}
+
 #name-text-container {
     font-size: 16px;
 }

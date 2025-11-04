@@ -40,13 +40,8 @@ public class CurTimeBean implements Serializable {
 
     private synchronized void updateDateTime() {
         Date now = new Date();
-        formattedDate = capitalizeFirst(dateFormat.format(now));
+        formattedDate = dateFormat.format(now);
         formattedTime = timeFormat.format(now);
-    }
-
-    private String capitalizeFirst(String s) {
-        if (s == null || s.isEmpty()) return s;
-        return Character.toUpperCase(s.charAt(0)) + s.substring(1);
     }
 
     public synchronized String getFormattedDate() {
