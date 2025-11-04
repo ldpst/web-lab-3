@@ -12,9 +12,18 @@ export class Clock {
     animate(timeString) {
         const [h, m, s] = timeString.split(" : ").map(Number);
 
-        const hourDeg = ((h % 12) + m / 60) * 30;
-        const minuteDeg = m * 6;
-        const secondDeg = s * 6;
+        const circleDeg = 360;
+        const hoursInCircle = 12;
+        const minutesInHour = 60;
+        const minutesInCircle = 60;
+        const secondsInCircle = 60;
+        const oneHourDeg = circleDeg / hoursInCircle;
+        const oneMinuteDeg = circleDeg / minutesInCircle;
+        const oneSecondDeg = circleDeg / secondsInCircle;
+
+        const hourDeg = ((h % hoursInCircle) + m / minutesInHour) * oneHourDeg;
+        const minuteDeg = m * oneMinuteDeg;
+        const secondDeg = s * oneSecondDeg;
 
         this.#hour.style.transform = `rotate(${hourDeg}deg)`;
         this.#minute.style.transform = `rotate(${minuteDeg}deg)`;
